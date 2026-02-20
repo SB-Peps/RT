@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>JB Peps</title>
+  <meta name="description" content="JB Peps — Research Use Only (RUO) product catalog and ordering." />
+  <style>
+    :root{
+      --bg:#0b1020;
+      --text:#eaf0ff;
+      --muted:#9db0d6;
+      --border:rgba(255,255,255,.14);
+      --brand1:#7aa7ff;
+      --brand2:#5ef0c6;
+      --danger:#ff6b6b;
+      --shadow: 0 18px 45px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1120px;
+      --pad: 20px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(1200px 900px at 10% 0%, rgba(122,167,255,.24), transparent 55%),
+        radial-gradient(900px 700px at 90% 10%, rgba(94,240,198,.18), transparent 55%),
+        linear-gradient(180deg, #070a12, var(--bg) 40%);
+      color:var(--text);
+      line-height:1.55;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding: 0 var(--pad)}
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(7,10,18,.62);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding: 14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; text-decoration:none;
+      font-weight:900; letter-spacing:.2px;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:14px;
+      background: linear-gradient(135deg, rgba(122,167,255,.95), rgba(94,240,198,.95));
+      box-shadow: var(--shadow);
+    }
+    .brand small{
+      display:block; font-weight:650; color:var(--muted); letter-spacing:0;
+      margin-top:2px;
+    }
+    nav a{
+      text-decoration:none; color:var(--muted);
+      padding: 9px 11px; border-radius: 12px;
+      border:1px solid transparent;
+      display:inline-flex; gap:8px; align-items:center;
+    }
+    nav a:hover{color:var(--text); border-color:var(--border); background: rgba(255,255,255,.05)}
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero{padding: 44px 0 12px}
+    .gridHero{
+      display:grid; gap:14px;
+      grid-template-columns: 1fr;
+    }
+    .heroMain{padding: 24px}
+
+    h1{margin:0 0 10px; font-size: clamp(30px, 4.2vw, 46px); line-height:1.08}
+    .sub{margin:0 0 16px; color:var(--muted)}
+
+    .pillRow{display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px}
+    .pill{
+      display:inline-flex; gap:8px; align-items:center;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.20);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .dot{width:8px; height:8px; border-radius:50%; background: var(--brand2)}
+
+    .ctaRow{display:flex; gap:12px; flex-wrap:wrap; margin-top: 14px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      text-decoration:none;
+      font-weight:800;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn.primary{
+      border-color: rgba(122,167,255,.55);
+      background: linear-gradient(135deg, rgba(122,167,255,.22), rgba(94,240,198,.14));
+    }
+    .btn.danger{
+      border-color: rgba(255,107,107,.55);
+      background: rgba(255,107,107,.10);
+    }
+    .btn:disabled, .btn.disabled{
+      opacity:.55; cursor:not-allowed; pointer-events:none;
+    }
+
+    .notice{
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 14px;
+      border:1px dashed rgba(255,255,255,.22);
+      background: rgba(0,0,0,.18);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    section{padding: 18px 0}
+    .sectionTitle{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:16px;
+      margin: 12px 0 10px;
+    }
+    .sectionTitle h2{margin:0; font-size: 20px}
+    .sectionTitle span{color:var(--muted); font-size: 13px}
+    .anchor{scroll-margin-top: 86px}
+
+    .grid3{display:grid; gap:14px; grid-template-columns: repeat(3, 1fr)}
+    @media (max-width: 940px){ .grid3{grid-template-columns:1fr} }
+
+    .product{padding: 18px; display:flex; flex-direction:column; gap:10px}
+    .product h3{margin:0}
+    .small{font-size: 12px; color:var(--muted)}
+
+    .tagRow{display:flex; gap:8px; flex-wrap:wrap}
+    .tag{
+      font-size: 12px;
+      color: var(--muted);
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    .checkRow{
+      display:flex; gap:10px; align-items:flex-start;
+      padding: 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+    }
+    .checkRow input{margin-top:3px}
+
+    .actions{display:flex; gap:10px; flex-wrap:wrap}
+
+    details{
+      border:1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      background: rgba(0,0,0,.18);
+      padding: 12px 14px;
+    }
+    details summary{
+      cursor:pointer;
+      font-weight: 850;
+      color: var(--text);
+    }
+    details p, details li{color: var(--muted)}
+
+    /* Modal */
+    .modalOverlay{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.72);
+      display:none;
+      align-items:center; justify-content:center;
+      padding: 18px;
+      z-index: 1000;
+    }
+    .modal{
+      width:min(860px, 100%);
+      max-height: 86vh;
+      overflow:auto;
+      border-radius: 18px;
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+    }
+    .modalHeader{
+      padding: 14px 16px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      position: sticky; top:0;
+      backdrop-filter: blur(12px);
+      background: rgba(7,10,18,.65);
+      border-top-left-radius: 18px;
+      border-top-right-radius: 18px;
+    }
+    .modalBody{padding: 16px}
+    .x{
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      border-radius: 12px;
+      padding: 8px 10px;
+      cursor:pointer;
+      font-weight:900;
+    }
+    .x:hover{filter:brightness(1.06)}
+
+    footer{
+      padding: 22px 0 40px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      margin-top: 18px;
+      font-size: 13px;
+    }
+    .legalLinks{display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px}
+    .legalLinks a{color: var(--muted)}
+    .legalLinks a:hover{color: var(--text)}
+    .kbd{
+      border:1px solid rgba(255,255,255,.18);
+      border-bottom-color: rgba(255,255,255,.28);
+      background: rgba(255,255,255,.06);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      display:inline-block;
+    }
+    textarea{
+      width:100%;
+      min-height:120px;
+      padding:10px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.18);
+      color:var(--text);
+    }
+    input{
+      width:100%;
+      padding:10px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.18);
+      color:var(--text);
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="wrap">
+    <div class="nav">
+      <a class="brand" href="#top" aria-label="JB Peps Home">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          JB Peps
+          <small>Research Use Only</small>
+        </div>
+      </a>
+
+      <nav aria-label="Site">
+        <a href="#compliance">RUO</a>
+        <a href="#catalog">Products</a>
+        <a href="#policies">Policies</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main id="top" class="wrap">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="gridHero">
+      <div class="card heroMain">
+        <h1>JB Peps</h1>
+        <p class="sub">Product catalog and ordering portal.</p>
+
+        <div class="pillRow">
+          <span class="pill"><span class="dot"></span>Age verification required</span>
+          <span class="pill"><span class="dot"></span>Agreement required</span>
+        </div>
+
+        <div class="ctaRow">
+          <a class="btn primary" href="#catalog">View products</a>
+          <a class="btn" href="#policies">Terms & Privacy</a>
+          <button class="btn" type="button" onclick="openModal('ageModal')">Age gate</button>
+        </div>
+
+        <!-- RUO warning (kept) -->
+        <div class="notice">
+          <strong>For Research Use Only. Not for Human Consumption or Clinical Use.</strong><br>
+          Purchasers are responsible for compliance with all applicable laws, regulations, and institutional policies.<br><br>
+          This site provides no instructions for human use including dosing, mixing, preparation, or injection.<br>
+          No claims are made that any product treats, cures, or prevents disease, or that it is safe or effective for human use.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPLIANCE (minimal as requested) -->
+  <section id="compliance" class="anchor">
+    <div class="sectionTitle">
+      <h2>RUO Notice</h2>
+      <span></span>
+    </div>
+
+    <div class="card product">
+      <p><strong>For Research Use Only. Not for Human Consumption or Clinical Use.</strong></p>
+      <p class="small">Purchasers are responsible for compliance with all applicable laws, regulations, and institutional policies.</p>
+      <p class="small">
+        This site provides no instructions for human use including dosing, mixing, preparation, or injection.
+        No claims are made that any product treats, cures, or prevents disease, or that it is safe or effective for human use.
+      </p>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="catalog" class="anchor">
+    <div class="sectionTitle">
+      <h2>Products</h2>
+      <span></span>
+    </div>
+
+    <div class="grid3">
+      <div class="card product">
+        <div class="tagRow">
+          <span class="tag">Research Use Only</span>
+          <span class="tag">Not for Human Consumption</span>
+        </div>
+        <h3>Product A</h3>
+        <p class="small"><strong>For Research Use Only. Not for Human Consumption or Clinical Use.</strong></p>
+        <div class="actions">
+          <a id="payA" class="btn primary disabled" href="#" onclick="return false;">Proceed to Payment</a>
+        </div>
+      </div>
+
+      <div class="card product">
+        <div class="tagRow">
+          <span class="tag">Research Use Only</span>
+          <span class="tag">Not for Human Consumption</span>
+        </div>
+        <h3>Product B</h3>
+        <p class="small"><strong>For Research Use Only. Not for Human Consumption or Clinical Use.</strong></p>
+        <div class="actions">
+          <a id="payB" class="btn primary disabled" href="#" onclick="return false;">Proceed to Payment</a>
+        </div>
+      </div>
+
+      <div class="card product">
+        <div class="tagRow">
+          <span class="tag">Research Use Only</span>
+          <span class="tag">Not for Human Consumption</span>
+        </div>
+        <h3>Product C</h3>
+        <p class="small"><strong>For Research Use Only. Not for Human Consumption or Clinical Use.</strong></p>
+        <div class="actions">
+          <a id="payC" class="btn primary disabled" href="#" onclick="return false;">Proceed to Payment</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PURCHASE AGREEMENT CHECKBOX -->
+    <div class="card product" style="margin-top:14px">
+      <h3>Purchase Agreement (Required)</h3>
+      <div class="checkRow">
+        <input id="agree" type="checkbox" />
+        <label for="agree" class="small">
+          I confirm I am at least 18 years old and I am purchasing solely for lawful research use.
+          I understand all products are <strong>For Research Use Only. Not for Human Consumption or Clinical Use</strong>.
+          I acknowledge there are <strong>no dosing/mixing/injection instructions</strong> and <strong>no medical or therapeutic claims</strong> on this site.
+        </label>
+      </div>
+
+      <div class="actions" style="margin-top:10px">
+        <button class="btn" type="button" onclick="openModal('paymentModal')">Payment setup</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- POLICIES -->
+  <section id="policies" class="anchor">
+    <div class="sectionTitle">
+      <h2>Policies</h2>
+      <span></span>
+    </div>
+
+    <div class="card product" style="margin-bottom:14px">
+      <p class="small">
+        This site provides no dosing or administration instructions (including mixing, preparation, or injection) and makes no medical or therapeutic claims.
+      </p>
+    </div>
+
+    <div class="grid3" style="grid-template-columns: 1fr 1fr; gap:14px">
+      <details class="card">
+        <summary>Terms of Service</summary>
+        <div style="padding: 10px 4px 4px">
+          <p><strong>1. Research Use Only</strong><br>
+            All products are labeled: <em>“For Research Use Only. Not for Human Consumption or Clinical Use.”</em>
+          </p>
+          <p><strong>2. No Medical Advice / No Claims</strong><br>
+            Nothing on this site constitutes medical advice. No claims are made that any product diagnoses, treats, cures, or prevents disease, or that it is safe or effective for human use.
+          </p>
+          <p><strong>3. No Dosing / Administration Instructions</strong><br>
+            This site does not provide instructions for human use, including dosing, mixing, preparation, or injection.
+          </p>
+          <p><strong>4. Eligibility & Compliance</strong><br>
+            You represent you are at least 18 years old and are purchasing solely for lawful research purposes and in compliance with all applicable laws, regulations, and institutional policies.
+          </p>
+          <p><strong>5. Returns / Refunds</strong><br>
+            Add your policy here.
+          </p>
+          <p><strong>6. Limitation of Liability</strong><br>
+            To the fullest extent permitted by law, JB Peps disclaims liability arising from misuse, improper handling, or non-compliant use.
+          </p>
+          <p class="small">Last updated: <span id="tosDate"></span></p>
+        </div>
+      </details>
+
+      <details class="card">
+        <summary>Privacy Policy</summary>
+        <div style="padding: 10px 4px 4px">
+          <p><strong>1. Data you submit</strong><br>
+            Contact form submissions (name, email, message).
+          </p>
+          <p><strong>2. How it is used</strong><br>
+            To respond to inquiries and support.
+          </p>
+          <p><strong>3. Payments</strong><br>
+            Payments are processed by third-party providers. This site does not store payment card details.
+          </p>
+          <p><strong>4. Local storage</strong><br>
+            Used only to remember age verification and agreement acceptance on your device.
+          </p>
+          <p><strong>5. Contact</strong><br>
+            Add your business email and jurisdiction here.
+          </p>
+          <p class="small">Last updated: <span id="privacyDate"></span></p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="anchor">
+    <div class="sectionTitle">
+      <h2>Contact</h2>
+      <span></span>
+    </div>
+
+    <div class="card product">
+      <form onsubmit="event.preventDefault(); alert('Thanks! Demo form received (not sent).');">
+        <label class="small" for="name">Name</label>
+        <input id="name" placeholder="Your name" required />
+
+        <div style="height:10px"></div>
+
+        <label class="small" for="email">Email</label>
+        <input id="email" type="email" placeholder="you@email.com" required />
+
+        <div style="height:10px"></div>
+
+        <label class="small" for="msg">Message</label>
+        <textarea id="msg" placeholder="Message" required></textarea>
+
+        <div style="height:12px"></div>
+
+        <button class="btn primary" type="submit">Send</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div><strong>© <span id="y"></span> JB Peps</strong></div>
+
+      <div class="notice" style="margin-top:12px">
+        <strong>For Research Use Only. Not for Human Consumption or Clinical Use.</strong><br>
+        Purchasers are responsible for compliance with all applicable laws, regulations, and institutional policies.<br><br>
+        No dosing, administration, mixing, preparation, or injection instructions are provided.<br>
+        No claims are made that any product treats, cures, prevents disease, or is safe or effective for human use.<br>
+        Nothing on this website constitutes medical advice.
+      </div>
+
+      <div class="legalLinks">
+        <a href="#policies">Terms</a>
+        <a href="#policies">Privacy</a>
+        <a href="#catalog">Products</a>
+      </div>
+    </div>
+  </footer>
+
+<!-- AGE VERIFICATION MODAL -->
+<div id="ageModal" class="modalOverlay" role="dialog" aria-modal="true" aria-label="Age verification">
+  <div class="modal">
+    <div class="modalHeader">
+      <div><strong>Age Verification</strong></div>
+      <button class="x" onclick="closeModal('ageModal')" aria-label="Close">✕</button>
+    </div>
+    <div class="modalBody">
+      <p class="small">You must be <strong>18+</strong> to access ordering links.</p>
+      <div class="actions">
+        <button class="btn primary" type="button" onclick="acceptAge()">I am 18 or older</button>
+        <button class="btn danger" type="button" onclick="denyAge()">I am under 18</button>
+      </div>
+      <div class="notice">
+        <strong>For Research Use Only. Not for Human Consumption or Clinical Use.</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAYMENT SETUP MODAL -->
+<div id="paymentModal" class="modalOverlay" role="dialog" aria-modal="true" aria-label="Payment setup">
+  <div class="modal">
+    <div class="modalHeader">
+      <div><strong>Payment Setup</strong></div>
+      <button class="x" onclick="closeModal('paymentModal')" aria-label="Close">✕</button>
+    </div>
+    <div class="modalBody">
+      <p class="small">
+        Paste your checkout URLs into <span class="kbd">PAYMENT_LINKS</span> in the code (Stripe Payment Links or PayPal URLs).
+      </p>
+      <div class="notice">
+        Payment buttons are enabled only after age verification + purchase agreement acceptance.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ====== CONFIG: paste your real payment links here ======
+  const PAYMENT_LINKS = {
+    A: "https://example.com/checkout-link-a",
+    B: "https://example.com/checkout-link-b",
+    C: "https://example.com/checkout-link-c"
+  };
+
+  const $ = (id) => document.getElementById(id);
+
+  function openModal(id){ $(id).style.display = "flex"; }
+  function closeModal(id){ $(id).style.display = "none"; }
+
+  // ====== Age gate ======
+  const AGE_KEY = "jbpeps_age_ok_v1";
+  const AGREEMENT_KEY = "jbpeps_agree_v1";
+
+  function acceptAge(){
+    localStorage.setItem(AGE_KEY, "yes");
+    closeModal("ageModal");
+    refreshGates();
+  }
+  function denyAge(){
+    localStorage.removeItem(AGE_KEY);
+    alert("Access restricted: you must be 18+ to proceed.");
+    closeModal("ageModal");
+    refreshGates();
+  }
+
+  // ====== Agreement + enable payment buttons ======
+  function refreshGates(){
+    const ageOk = localStorage.getItem(AGE_KEY) === "yes";
+    const agreeOk = localStorage.getItem(AGREEMENT_KEY) === "yes";
+
+    const payA = $("payA"), payB = $("payB"), payC = $("payC");
+    payA.href = PAYMENT_LINKS.A || "#";
+    payB.href = PAYMENT_LINKS.B || "#";
+    payC.href = PAYMENT_LINKS.C || "#";
+
+    const linksConfigured = Boolean(PAYMENT_LINKS.A && PAYMENT_LINKS.B && PAYMENT_LINKS.C);
+    const enable = ageOk && agreeOk && linksConfigured;
+
+    [payA, payB, payC].forEach(btn => {
+      if(enable){
+        btn.classList.remove("disabled");
+        btn.onclick = null;
+        btn.setAttribute("target","_blank");
+        btn.setAttribute("rel","noopener");
+      } else {
+        btn.classList.add("disabled");
+        btn.onclick = (e) => {
+          e.preventDefault();
+          if(!ageOk) openModal("ageModal");
+          else if(!agreeOk) alert("Please accept the Purchase Agreement checkbox first.");
+          else alert("Payment links are not configured yet.");
+          return false;
+        };
+      }
+    });
+  }
+
+  // Agreement checkbox persistence
+  const agreeBox = $("agree");
+  agreeBox.addEventListener("change", () => {
+    if(agreeBox.checked) localStorage.setItem(AGREEMENT_KEY, "yes");
+    else localStorage.removeItem(AGREEMENT_KEY);
+    refreshGates();
+  });
+
+  // ====== Auto-run ======
+  $("y").textContent = new Date().getFullYear();
+  $("tosDate").textContent = new Date().toLocaleDateString();
+  $("privacyDate").textContent = new Date().toLocaleDateString();
+
+  // Restore agreement state
+  agreeBox.checked = localStorage.getItem(AGREEMENT_KEY) === "yes";
+
+  // Show age gate on first visit if not accepted
+  if(localStorage.getItem(AGE_KEY) !== "yes"){
+    openModal("ageModal");
+  }
+
+  refreshGates();
+
+  // Close modal when clicking outside
+  document.querySelectorAll(".modalOverlay").forEach(overlay => {
+    overlay.addEventListener("click", (e) => {
+      if(e.target === overlay) overlay.style.display = "none";
+    });
+  });
+</script>
+</body>
+</html>
